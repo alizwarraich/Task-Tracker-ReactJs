@@ -1,10 +1,8 @@
 import React from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Header from "./components/Header";
 import Footer from './components/Footer';
 import Tasks from "./components/Tasks";
 import AddTask from "./components/AddTask";
-import About from './components/About';
 import { useState } from 'react';
 
 function App() {
@@ -58,32 +56,20 @@ function App() {
   }
 
   return (
-    <Router>
-      <div className="container">
-        <Header form={form} showForm={showForm} />
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                {form &&
-                  <AddTask onAdd={addTask} />
-                }
-                {
-                  tasks.length > 0 ? (
-                    <Tasks tasks={tasks} deleteTask={deleteTask} triggerFlag={triggerFlag} />
-                  ) : (
-                    <h3>No task found</h3>
-                  )
-                }
-              </>
-            }
-          />
-          <Route path="/about" element={<About />} />
-        </Routes>
-        <Footer />
-      </div>
-    </Router>
+    <div className="container">
+      <Header form={form} showForm={showForm} />
+      {form &&
+        <AddTask onAdd={addTask} />
+      }
+      {
+        tasks.length > 0 ? (
+          <Tasks tasks={tasks} deleteTask={deleteTask} triggerFlag={triggerFlag} />
+        ) : (
+          <h3>No task found</h3>
+        )
+      }
+      <Footer />
+    </div>
   );
 }
 
